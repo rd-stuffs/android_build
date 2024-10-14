@@ -2123,7 +2123,7 @@ function source_vendorsetup() {
     unset VENDOR_PYTHONPATH
     local T="$(gettop)"
     allowed=
-    for f in $(cd "$T" && find -L device vendor product -maxdepth 4 -name 'allowed-vendorsetup_sh-files' 2>/dev/null | sort); do
+    for f in $(cd "$T" && find -L device vendor prebuilts product -maxdepth 4 -name 'allowed-vendorsetup_sh-files' 2>/dev/null | sort); do
         if [ -n "$allowed" ]; then
             echo "More than one 'allowed_vendorsetup_sh-files' file found, not including any vendorsetup.sh files:"
             echo "  $allowed"
@@ -2135,7 +2135,7 @@ function source_vendorsetup() {
 
     allowed_files=
     [ -n "$allowed" ] && allowed_files=$(cat "$allowed")
-    for dir in device vendor product; do
+    for dir in device vendor prebuilts product; do
         for f in $(cd "$T" && test -d $dir && \
             find -L $dir -maxdepth 4 -name 'vendorsetup.sh' 2>/dev/null | sort); do
 
